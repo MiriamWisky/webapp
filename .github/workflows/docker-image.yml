@@ -16,6 +16,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag miriamwisky/webapp-demo:${{ github.run_number }}-${{github.sha }}
-   
+    - name: docker login
+      run: docker login -u ${{ secrets.DOCKER_HUB_NAME }} -p ${{secrets.DOCKER_HUB }}
     - name: Push the Docker image
       run: docker push miriamwisky/webapp-demo:${{ github.run_number }}-${{github.sha }}
